@@ -13,7 +13,7 @@ describe Board do
       end
     end
 
-    subject(:mid_board) { described_class.new(Array.new(6) { Array.new(7, "\e[44m b \e[0m") }) }
+    subject(:mid_board) { described_class.new(Array.new(6) { Array.new(7, "\e[91m\u25CF\e[0m") }) }
 
     context 'when player picks a full column' do
       it 'returns false' do
