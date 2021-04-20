@@ -2,6 +2,8 @@
 
 # Board
 class Board
+  attr_accessor :board
+
   def initialize(board = Array.new(6) { Array.new(7, "\e[94m\u2423\e[0m") })
     @board = board
   end
