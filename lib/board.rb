@@ -13,7 +13,7 @@ class Board
   end
 
   def available_space?(move)
-    
+    @board[0][move] == "\e[94m\u2423\e[0m"
   end
 end
 
