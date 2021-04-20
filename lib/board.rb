@@ -17,6 +17,12 @@ class Board
   def available_space?(move)
     @board[0][move] == "\e[94m\u2423\e[0m"
   end
+
+  def place_move(move, token)
+    column = @board.reverse.transpose[move]
+    row = column.find_index { |space| space == "\e[94m\u2423\e[0m" }
+    @board[5 - row][move] = token
+  end
 end
 
 #\e[91m\u25CF\e[0m red
