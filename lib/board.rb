@@ -24,8 +24,20 @@ class Board
     @board[5 - row][move] = token
   end
 
-  def tie?
+  def full?
     @board.flatten.none? { |space| space == "\e[94m\u2423\e[0m" }
+  end
+
+  def column_victory?
+    moves = @board.transpose.flatten
+    victory = [moves[0]]
+    until moves.empty?
+      moves.shift
+      victory.clear if victory[0] != moves[0] || victory[0] == "\e[94m\u2423\e[0m"
+      victory.push(moves[0])
+      break if victory.length == 4
+    end
+    victory.length == 4
   end
 end
 
