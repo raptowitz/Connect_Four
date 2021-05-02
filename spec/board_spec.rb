@@ -36,7 +36,7 @@ describe Board do
 
     context 'when player picks a column mid game' do
       before do
-        new_board.board[5][2] = 'X'
+        new_board.place_move(2, 'X')
       end
 
       it 'changes next available row from blank to player token' do
@@ -70,10 +70,10 @@ describe Board do
 
     context 'when a player has 4 in a row in a column' do
       before do
-        win_board.board[5][3] = 'X'
-        win_board.board[4][3] = 'X'
-        win_board.board[3][3] = 'X'
-        win_board.board[2][3] = 'X'
+        win_board.place_move(2, 'X')
+        win_board.place_move(2, 'X')
+        win_board.place_move(2, 'X')
+        win_board.place_move(2, 'X')
       end
 
       it 'returns true' do
@@ -86,13 +86,30 @@ describe Board do
 
     context 'when player only has 3 in a row in a column' do
       before do
-        win_board.board[5][3] = 'X'
-        win_board.board[4][3] = 'X'
-        win_board.board[3][3] = 'X'
+        mid_board.place_move(2, 'X')
+        mid_board.place_move(2, 'X')
+        mid_board.place_move(2, 'X')
       end
 
       it 'returns false' do
         output = mid_board.column_victory?
+        expect(output).to be false
+      end
+    end
+
+    subject(:mixed_board) { described_class.new }
+
+    context 'when column is a mix of player tokens' do
+      before do
+        mixed_board.place_move(3, 'X')
+        mixed_board.place_move(3, 'O')
+        mixed_board.place_move(3, 'X')
+        mixed_board.place_move(3, 'O')
+        mixed_board.place_move(3, 'X')
+      end
+
+      it 'returns false' do
+        output = mixed_board.column_victory?
         expect(output).to be false
       end
     end
