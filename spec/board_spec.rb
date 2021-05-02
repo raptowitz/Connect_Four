@@ -13,7 +13,7 @@ describe Board do
       end
     end
 
-    subject(:full_board) { described_class.new(Array.new(6) { Array.new(7, "\e[91m\u25CF\e[0m") }) }
+    subject(:full_board) { described_class.new('?', Array.new(6) { Array.new(7, 'X') }) }
 
     context 'when player picks a full column' do
       it 'returns false' do
@@ -24,11 +24,11 @@ describe Board do
   end
 
   describe '#place_move' do
-    subject(:new_board) { described_class.new }
+    subject(:new_board) { described_class.new('?') }
 
     context 'when player picks an empty column' do
       it 'changes last row of column from blank to player token' do
-        expect { new_board.place_move(2, "\e[91m\u25CF\e[0m") }.to change { new_board.board[5][2] }.from("\e[94m\u2423\e[0m").to("\e[91m\u25CF\e[0m")
+        expect { new_board.place_move(2, 'X') }.to change { new_board.board[5][2] }.from('?').to('X')
       end
     end
 
@@ -36,17 +36,17 @@ describe Board do
 
     context 'when player picks a column mid game' do
       before do
-        new_board.board[5][2] = "\e[91m\u25CF\e[0m"
+        new_board.board[5][2] = 'X'
       end
 
       it 'changes next available row from blank to player token' do
-        expect { new_board.place_move(2, "\e[91m\u25CF\e[0m") }.to change { new_board.board[4][2] }.from("\e[94m\u2423\e[0m").to("\e[91m\u25CF\e[0m")
+        expect { new_board.place_move(2, 'X') }.to change { new_board.board[4][2] }.from('?').to('X')
       end
     end
   end
 
   describe '#full?' do
-    subject(:full_board) { described_class.new(Array.new(6) { Array.new(7, "\e[91m\u25CF\e[0m") }) }
+    subject(:full_board) { described_class.new('?', Array.new(6) { Array.new(7, 'X') }) }
 
     context 'when the game board is full' do
       it 'returns true' do
@@ -70,10 +70,10 @@ describe Board do
 
     context 'when a player has 4 in a row in a column' do
       before do
-        win_board.board[5][3] = "\e[91m\u25CF\e[0m"
-        win_board.board[4][3] = "\e[91m\u25CF\e[0m"
-        win_board.board[3][3] = "\e[91m\u25CF\e[0m"
-        win_board.board[2][3] = "\e[91m\u25CF\e[0m"
+        win_board.board[5][3] = 'X'
+        win_board.board[4][3] = 'X'
+        win_board.board[3][3] = 'X'
+        win_board.board[2][3] = 'X'
       end
 
       it 'returns true' do
@@ -86,9 +86,9 @@ describe Board do
 
     context 'when player only has 3 in a row in a column' do
       before do
-        win_board.board[5][3] = "\e[91m\u25CF\e[0m"
-        win_board.board[4][3] = "\e[91m\u25CF\e[0m"
-        win_board.board[3][3] = "\e[91m\u25CF\e[0m"
+        win_board.board[5][3] = 'X'
+        win_board.board[4][3] = 'X'
+        win_board.board[3][3] = 'X'
       end
 
       it 'returns false' do
