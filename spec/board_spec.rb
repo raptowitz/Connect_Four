@@ -66,16 +66,16 @@ describe Board do
   end
 
   describe '#column_victory?' do
-    subject(:win_board) { described_class.new }
+    subject(:win_board) do
+      described_class.new(0, [[0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 1, 0, 0, 0, 0],
+                              [0, 0, 1, 2, 0, 0, 0],
+                              [0, 0, 1, 2, 0, 0, 0],
+                              [0, 0, 1, 2, 0, 0, 0]])
+    end
 
     context 'when a player has 4 in a row in a column' do
-      before do
-        win_board.place_move(2, 'X')
-        win_board.place_move(2, 'X')
-        win_board.place_move(2, 'X')
-        win_board.place_move(2, 'X')
-      end
-
       it 'returns true' do
         output = win_board.column_victory?
         expect(output).to be true
@@ -98,17 +98,15 @@ describe Board do
       end
     end
 
-    subject(:mixed_board) { described_class.new }
-
+    subject(:mixed_board) do
+      described_class.new(0, [[0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 2, 0, 0, 0, 0],
+                              [0, 0, 1, 0, 0, 0, 0],
+                              [0, 0, 2, 0, 0, 0, 0],
+                              [0, 0, 1, 0, 0, 0, 0]])
+    end
     context 'when column is a mix of player tokens' do
-      before do
-        mixed_board.place_move(3, 'X')
-        mixed_board.place_move(3, 'O')
-        mixed_board.place_move(3, 'X')
-        mixed_board.place_move(3, 'O')
-        mixed_board.place_move(3, 'X')
-      end
-
       it 'returns false' do
         output = mixed_board.column_victory?
         expect(output).to be false
