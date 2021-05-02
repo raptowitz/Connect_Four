@@ -147,4 +147,40 @@ describe Board do
       end
     end
   end
+
+  describe '#diagonol_victory?' do
+    subject(:win_board) do
+      described_class.new(0, [[0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 0, 0, 0, 0, 1],
+                              [0, 0, 0, 0, 0, 1, 2],
+                              [0, 0, 0, 2, 1, 2, 1],
+                              [0, 0, 0, 1, 2, 1, 2]])
+    end
+
+    context 'when player has 4 in a row in a diagonol' do
+      it 'returns true' do
+        output = win_board.diagonal_victory?
+        expect(output).to be true
+      end
+    end
+
+    subject(:mid_board) do
+      described_class.new(0, [[0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 0, 0, 0, 1, 2],
+                              [0, 0, 0, 2, 1, 2, 1],
+                              [0, 0, 0, 1, 2, 1, 2]])
+    end
+
+    context 'when player only has 3 in a row in a diagonol' do
+      it 'returns false' do
+        output = mid_board.diagonal_victory?
+        expect(output).to be false
+      end
+    end
+
+
+  end
 end
