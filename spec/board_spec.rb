@@ -123,28 +123,28 @@ describe Board do
                               [0, 0, 2, 2, 2, 0, 0],
                               [0, 0, 1, 1, 1, 1, 0]])
     end
-  end
 
-  context 'when player has 4 in a row in a row' do
-    it 'returns true' do
-      output = win_board.row_victory?
-      expect(output).to be true
+    context 'when player has 4 in a row in a row' do
+      it 'returns true' do
+        output = win_board.row_victory?
+        expect(output).to be true
+      end
     end
-  end
 
-  subject(:mid_board) do
-    described_class.new(0, [[0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 0, 0, 0, 0, 0],
-                            [0, 0, 2, 2, 0, 0, 0],
-                            [0, 0, 1, 1, 0, 0, 0]])
-  end
+    subject(:mid_board) do
+      described_class.new(0, [[0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 2, 2, 0, 0, 0],
+                              [0, 0, 1, 1, 0, 0, 0]])
+    end
 
-  context 'when player only has 2 in a row in a row' do
-    it 'returns false' do
-      output = mid_board.row_victory?
-      expect(output).to be false
+    context 'when player only has 2 in a row in a row' do
+      it 'returns false' do
+        output = mid_board.row_victory?
+        expect(output).to be false
+      end
     end
   end
 end

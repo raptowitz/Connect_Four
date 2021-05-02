@@ -29,6 +29,17 @@ class Board
 
   def column_victory?
     moves = @board.transpose.flatten
+    four_in_a_row?(moves)
+  end
+
+  def row_victory?
+    moves = @board.flatten
+    four_in_a_row?(moves)
+  end
+
+  private
+
+  def four_in_a_row?(moves)
     victory = [moves[0]]
     until moves.empty?
       moves.shift
