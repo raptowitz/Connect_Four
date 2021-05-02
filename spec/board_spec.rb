@@ -44,4 +44,24 @@ describe Board do
       end
     end
   end
+
+  describe '#tie?' do
+    subject(:full_board) { described_class.new(Array.new(6) { Array.new(7, "\e[91m\u25CF\e[0m") }) }
+
+    context 'when the game board is full' do
+      it 'returns true' do
+        output = full_board.tie?
+        expect(output).to be true
+      end
+    end
+
+    subject(:new_board) { described_class.new }
+
+    context 'when spaces on the board are still open' do
+      it 'returns false' do
+        output = new_board.tie?
+        expect(output).to be false
+      end
+    end
+  end
 end
