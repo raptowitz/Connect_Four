@@ -28,7 +28,7 @@ describe Board do
 
     context 'when player picks an empty column' do
       it 'changes last row of column from blank to player token' do
-        expect { new_board.place_move(2, 'X') }.to change { new_board.board[5][2] }.from('?').to('X')
+        expect { new_board.place_move(2, 'X') }.to change { new_board.instance_variable_get(:@board)[5][2] }.from('?').to('X')
       end
     end
 
@@ -40,7 +40,7 @@ describe Board do
       end
 
       it 'changes next available row from blank to player token' do
-        expect { new_board.place_move(2, 'X') }.to change { new_board.board[4][2] }.from('?').to('X')
+        expect { new_board.place_move(2, 'X') }.to change { new_board.instance_variable_get(:@board)[4][2] }.from('?').to('X')
       end
     end
   end

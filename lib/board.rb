@@ -2,8 +2,6 @@
 
 # Board
 class Board
-  attr_reader :board
-
   def initialize(blank = "\e[94m\u2423\e[0m", board = Array.new(6) { Array.new(7, blank) })
     @board = board
     @blank = blank
