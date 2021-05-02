@@ -64,4 +64,37 @@ describe Board do
       end
     end
   end
+
+  describe '#column_victory?' do
+    subject(:win_board) { described_class.new }
+
+    context 'when a player has 4 in a row in a column' do
+      before do
+        win_board.board[5][3] = "\e[91m\u25CF\e[0m"
+        win_board.board[4][3] = "\e[91m\u25CF\e[0m"
+        win_board.board[3][3] = "\e[91m\u25CF\e[0m"
+        win_board.board[2][3] = "\e[91m\u25CF\e[0m"
+      end
+
+      it 'returns true' do
+        output = win_board.column_victory?
+        expect(output).to be true
+      end
+    end
+
+    subject(:mid_board) { described_class.new }
+
+    context 'when player only has 3 in a row in a column' do
+      before do
+        win_board.board[5][3] = "\e[91m\u25CF\e[0m"
+        win_board.board[4][3] = "\e[91m\u25CF\e[0m"
+        win_board.board[3][3] = "\e[91m\u25CF\e[0m"
+      end
+
+      it 'returns false' do
+        output = mid_board.column_victory?
+        expect(output).to be false
+      end
+    end
+  end
 end
