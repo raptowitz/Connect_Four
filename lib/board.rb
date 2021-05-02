@@ -23,6 +23,10 @@ class Board
     row = column.find_index { |space| space == "\e[94m\u2423\e[0m" }
     @board[5 - row][move] = token
   end
+
+  def tie?
+    @board.flatten.none? { |space| space == "\e[94m\u2423\e[0m" }
+  end
 end
 
 #\e[91m\u25CF\e[0m red
