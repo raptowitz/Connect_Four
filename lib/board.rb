@@ -37,6 +37,21 @@ class Board
     four_in_a_row?(moves)
   end
 
+  def diagonal_victory?
+    victory = false
+    @board.each_with_index do |row, row_num|
+      row.each_with_index do |column, column_num|
+        next if column == @blank || row_num + 3 > 5
+
+        if column == @board[row_num + 1][column_num + 1] && column == @board[row_num + 2][column_num + 2] && column == @board[row_num + 3][column_num + 3] ||
+           column == @board[row_num + 1][column_num - 1] && column == @board[row_num + 2][column_num - 2] && column == @board[row_num + 3][column_num - 3]
+          victory = true
+        end
+      end
+    end
+    victory
+  end
+
   private
 
   def four_in_a_row?(moves)

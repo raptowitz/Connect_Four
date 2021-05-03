@@ -149,7 +149,23 @@ describe Board do
   end
 
   describe '#diagonol_victory?' do
-    subject(:win_board) do
+    subject(:pos_win_board) do
+      described_class.new(0, [[0, 0, 0, 0, 0, 0, 0],
+                              [0, 0, 0, 0, 0, 0, 0],
+                              [1, 0, 0, 0, 0, 0, 0],
+                              [2, 1, 0, 0, 0, 0, 0],
+                              [1, 2, 1, 2, 0, 0, 0],
+                              [2, 1, 2, 1, 0, 0, 0]])
+    end
+
+    context 'when player has 4 in a row in a positive diagonol' do
+      it 'returns true' do
+        output = pos_win_board.diagonal_victory?
+        expect(output).to be true
+      end
+    end
+
+    subject(:neg_win_board) do
       described_class.new(0, [[0, 0, 0, 0, 0, 0, 0],
                               [0, 0, 0, 0, 0, 0, 0],
                               [0, 0, 0, 0, 0, 0, 1],
@@ -158,9 +174,9 @@ describe Board do
                               [0, 0, 0, 1, 2, 1, 2]])
     end
 
-    context 'when player has 4 in a row in a diagonol' do
+    context 'when player has 4 in a row in a negative diagonol' do
       it 'returns true' do
-        output = win_board.diagonal_victory?
+        output = neg_win_board.diagonal_victory?
         expect(output).to be true
       end
     end
@@ -180,7 +196,5 @@ describe Board do
         expect(output).to be false
       end
     end
-
-
   end
 end
