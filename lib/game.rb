@@ -45,7 +45,7 @@ class Game
 
   def new_game
     puts 'Play again? (y/n)'
-    return unless gets.chomp == 'n'
+    return puts "\e[H\e[2J" unless gets.chomp == 'n'
 
     @play_again = false
     puts 'Thanks for playing!'
