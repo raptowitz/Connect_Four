@@ -9,8 +9,8 @@ class Game
   end
 
   def play_game
+    @board.print
     until game_over?
-      @board.print
       player_move(@player1)
       break if game_over?
 
@@ -29,5 +29,13 @@ class Game
     @board.place_move(move, player.token)
     puts "\e[H\e[2J"
     @board.print
+  end
+
+  def display_results
+    if @board.full?
+      puts 'Tie!'
+    else
+      puts 'Victory!'
+    end
   end
 end
