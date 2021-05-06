@@ -37,17 +37,19 @@ describe Game do
   end
 
   describe '#player_move' do
-    let(:player1) { instance_double(Player) }
+    let(:player1) { instance_double(Player, token:'X') }
     let(:board) { instance_double(Board) }
     subject(:game) { described_class.new(board, player1) }
 
     context 'when player picks a full column once' do
       before do
         allow(board).to receive(:available_space?).and_return(false, true)
+        allow(player1).to receive(:take_turn).and_return(1, 2)
+        allow(board).to receive(:place_move).with(2, 'X')
       end
 
-      it 'send take turn to player twice' do
-        expect(player1).to receive(:take_turn).once
+      it 'sends take turn to player twice' do
+        expect(player1).to receive(:take_turn).twice
         game.player_move(player1)
       end
     end

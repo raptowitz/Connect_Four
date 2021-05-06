@@ -11,4 +11,10 @@ class Game
   def game_over?
     @board.full? || @board.column_victory? || @board.row_victory? || @board.diagonal_victory?
   end
+
+  def player_move(player)
+    move = player.take_turn
+    move = player.take_turn until @board.available_space?(move)
+    @board.place_move(move, player.token)
+  end
 end
