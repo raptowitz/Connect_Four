@@ -5,6 +5,24 @@ require_relative '../lib/board'
 require_relative '../lib/player'
 
 describe Game do
+  describe '#play_game' do
+    let(:board) { instance_double(Board) }
+    let(:player1) { instance_double(Player) }
+    let(:player2) { instance_double(Player) }
+    subject(:end_game) { described_class.new(board, player1, player2) }
+
+    context 'when game is over' do
+      before do
+        allow(game).to receive(:game_over?).and_return(true)
+      end
+
+      it 'stops loop and displays results' do
+        expect(end_game).to receive(:display_results)
+        end_game.play_game
+      end
+    end
+  end
+
   describe '#game_over?' do
     let(:full_board) { instance_double(Board) }
     subject(:tie_game) { described_class.new(full_board) }
@@ -32,6 +50,23 @@ describe Game do
       it 'returns true' do
         output = won_game.game_over?
         expect(output).to be true
+      end
+    end
+
+    let(:mid_board) { instance_double(Board) }
+    subject(:mid_game) { described_class.new(mid_board) }
+
+    context 'when the game is not over' do
+      before do
+        allow(mid_board).to receive(:full?).and_return(false)
+        allow(mid_board).to receive(:column_victory?).and_return(false)
+        allow(mid_board).to receive(:row_victory?).and_return(false)
+        allow(mid_board).to receive(:diagonal_victory?).and_return(false)
+      end
+
+      it 'returns false' do
+        output = mid_game.game_over?
+        expect(output).to be false
       end
     end
   end
