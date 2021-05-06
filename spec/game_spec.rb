@@ -13,7 +13,7 @@ describe Game do
 
     context 'when game is over' do
       before do
-        allow(game).to receive(:game_over?).and_return(true)
+        allow(end_game).to receive(:game_over?).and_return(true)
       end
 
       it 'stops loop and displays results' do
@@ -81,6 +81,8 @@ describe Game do
         allow(board).to receive(:available_space?).and_return(false, true)
         allow(player1).to receive(:take_turn).and_return(1, 2)
         allow(board).to receive(:place_move).with(2, 'X')
+        allow(game).to receive(:puts).with("\e[H\e[2J")
+        allow(board).to receive(:print)
       end
 
       it 'sends take turn to player twice' do

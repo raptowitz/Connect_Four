@@ -8,6 +8,17 @@ class Game
     @board = board
   end
 
+  def play_game
+    until game_over?
+      @board.print
+      player_move(@player1)
+      break if game_over?
+
+      player_move(@player2)
+    end
+    display_results
+  end
+
   def game_over?
     @board.full? || @board.column_victory? || @board.row_victory? || @board.diagonal_victory?
   end
@@ -16,5 +27,7 @@ class Game
     move = player.take_turn
     move = player.take_turn until @board.available_space?(move)
     @board.place_move(move, player.token)
+    puts "\e[H\e[2J"
+    @board.print
   end
 end
