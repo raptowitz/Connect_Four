@@ -8,7 +8,7 @@ describe Player do
 
     context 'when player picks a valid column' do
       it 'stops loop and does not display instructions' do
-        instructions = 'Pick an unfilled column between 1-7!'
+        instructions = 'Pick an unfilled column between 0-6!'
         expect(player).not_to receive(:puts).with(instructions)
         player.validate_turn(1)
       end
@@ -21,7 +21,7 @@ describe Player do
       end
 
       it 'completes loop and display instructions once' do
-        instructions = 'Pick an unfilled column between 1-7!'
+        instructions = 'Pick an unfilled column between 0-6!'
         expect(player).to receive(:puts).with(instructions).once
         player.validate_turn(9)
       end

@@ -11,6 +11,7 @@ class Board
     @board.each do |row|
       puts row.join("\e[94m|\e[0m")
     end
+    puts '0 1 2 3 4 5 6'
   end
 
   def available_space?(move)

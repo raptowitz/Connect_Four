@@ -13,8 +13,8 @@ class Player
   end
 
   def validate_turn(move)
-    until move >= 1 && move <= 7
-      puts 'Pick an unfilled column between 1-7!'
+    until move >= 0 && move <= 6
+      puts 'Pick an unfilled column between 0-6!'
       move = gets.to_i
     end
     move
