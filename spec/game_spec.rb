@@ -13,6 +13,7 @@ describe Game do
 
     context 'when game is over' do
       before do
+        allow(board).to receive(:print)
         allow(end_game).to receive(:game_over?).and_return(true)
       end
 
@@ -88,6 +89,32 @@ describe Game do
       it 'sends take turn to player twice' do
         expect(player1).to receive(:take_turn).twice
         game.player_move(player1)
+      end
+    end
+  end
+
+  describe '#new_game' do
+    subject(:game) { described_class.new }
+
+    context 'when player enters n' do
+      before do
+        allow(game).to receive(:puts)
+        allow(game).to receive(:gets).and_return('n')
+      end
+
+      it 'changes play again to false' do
+        expect { game.new_game }.to change { game.instance_variable_get(:@play_again) }.from(true).to(false)
+      end
+    end
+
+    context 'when player enters y' do
+      before do
+        allow(game).to receive(:puts)
+        allow(game).to receive(:gets).and_return('y')
+      end
+
+      it 'does not change play again' do
+        expect { game.new_game }.not_to(change { game.instance_variable_get(:@play_again) })
       end
     end
   end

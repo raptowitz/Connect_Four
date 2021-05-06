@@ -2,10 +2,13 @@
 
 # Game
 class Game
+  attr_reader :play_again
+
   def initialize(board = Board.new, player1 = Player.new("\e[91m\u25CF\e[0m"), player2 = Player.new("\e[93m\u25CF\e[0m"))
     @player1 = player1
     @player2 = player2
     @board = board
+    @play_again = true
   end
 
   def play_game
@@ -37,5 +40,14 @@ class Game
     else
       puts 'Victory!'
     end
+    new_game
+  end
+
+  def new_game
+    puts 'Play again? (y/n)'
+    return unless gets.chomp == 'n'
+
+    @play_again = false
+    puts 'Thanks for playing!'
   end
 end
