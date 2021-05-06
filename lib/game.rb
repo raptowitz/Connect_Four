@@ -7,4 +7,8 @@ class Game
     @player2 = player2
     @board = board
   end
+
+  def game_over?
+    @board.full? || @board.column_victory? || @board.row_victory? || @board.diagonal_victory?
+  end
 end
